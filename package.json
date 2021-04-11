@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "14.15.4",
+    "npm": "6.14.10"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +18,9 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "helmet": "^4.4.1"
+    "helmet": "^4.4.1",
+    "knex": "^0.95.4",
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
