@@ -36,4 +36,14 @@ router.put("/pause-task", async (req, res) => {
   }
 });
 
+router.put("/finish-task", async (req, res) => {
+  const { id, diffTime, stopTime } = req.body;
+  try {
+    const data = await tasks.finishTask(id, diffTime, stopTime);
+    res.status(200).json({ status: "ok", data });
+  } catch (err) {
+    console.log(err.message);
+  }
+});
+
 module.exports = router;

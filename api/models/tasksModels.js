@@ -3,6 +3,7 @@ const db = require("../../db/db-config");
 module.exports = {
   createTask,
   pauseTask,
+  finishTask,
 };
 
 async function createTask(name, startTime) {
@@ -39,4 +40,19 @@ async function pauseTask(id, diffTime) {
       return await getTask(id);
     }
   }
+}
+
+async function finishTask(id, diffTime, endTime) {
+  const { length } = await getTask(id);
+  const data = await db("jobs")
+    .where({ jobId: id })
+    .update(
+      {
+        length: length + diffTime,
+        endTime,
+        isFinished: true,
+      },
+      ["jobId"]
+    );
+  return await getTask(id);
 }
