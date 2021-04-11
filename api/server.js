@@ -12,8 +12,6 @@ server.use(cors());
 server.use(express.json());
 server.use(helmet());
 
-server.get("/", taskRouter);
-
-server.post("/create-task", taskRouter);
+server.use("/", taskRouter);
 
 module.exports = server;
