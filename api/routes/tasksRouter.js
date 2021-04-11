@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
 router.post("/create-task", async (req, res) => {
   const { name, startTime } = req.body;
   try {
-    const data = await tasks.createTask(name, startTime);
+    const data = await tasks.createTask(name, "" + startTime);
     res.status(200).json({
       status: "ok",
       data: {
