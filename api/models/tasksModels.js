@@ -23,16 +23,15 @@ async function pauseTask(id, diffTime) {
   if (!length) {
     const data = await db("jobs")
       .where({ jobId: id })
-      .update({ length: "" + diffTime });
+      .update({ length: diffTime });
     if (data) {
       return await getTask(id);
     }
   } else {
     const lengthInNum = parseInt(length, 10);
-    const diffTimeInNumb = lengthInNum + diffTime;
     const data = await db("jobs")
       .where({ jobId: id })
-      .update({ length: "" + diffTimeInNumb });
+      .update({ length: lengthInNum + diffTime });
     if (data) {
       return await getTask(id);
     }
