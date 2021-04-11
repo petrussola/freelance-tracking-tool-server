@@ -6,10 +6,13 @@ module.exports = {
 };
 
 async function createTask(name, startTime) {
-  const data = await db("jobs").insert({
-    name: name,
-    startTime: startTime,
-  });
+  const data = await db("jobs").insert(
+    {
+      name: name,
+      startTime: startTime,
+    },
+    ["jobId"]
+  );
   return data;
 }
 
@@ -23,7 +26,7 @@ async function pauseTask(id, diffTime) {
   if (!length) {
     const data = await db("jobs")
       .where({ jobId: id })
-      .update({ length: diffTime });
+      .update({ length: diffTime }, ["jobId"]);
     if (data) {
       return await getTask(id);
     }
@@ -31,7 +34,7 @@ async function pauseTask(id, diffTime) {
     const lengthInNum = parseInt(length, 10);
     const data = await db("jobs")
       .where({ jobId: id })
-      .update({ length: lengthInNum + diffTime });
+      .update({ length: lengthInNum + diffTime }, ["jobId"]);
     if (data) {
       return await getTask(id);
     }
