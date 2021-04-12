@@ -4,6 +4,7 @@ module.exports = {
   createTask,
   pauseTask,
   finishTask,
+  editName,
 };
 
 async function createTask(name, startTime) {
@@ -55,4 +56,9 @@ async function finishTask(id, diffTime, endTime) {
       ["jobId"]
     );
   return await getTask(id);
+}
+
+async function editName(name, id) {
+  const data = await db("jobs").where({ jobId: id }).update({ name }, "jobId");
+  return data;
 }

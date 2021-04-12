@@ -42,7 +42,20 @@ router.put("/finish-task", async (req, res) => {
     const data = await tasks.finishTask(id, diffTime, stopTime);
     res.status(200).json({ status: "ok", data });
   } catch (err) {
-    console.log(err.message);
+    res.status(500).json({ status: "fail", data: { message: err.message } });
+  }
+});
+
+router.put("/edit-name", async (req, res) => {
+  const { name, id } = req.body;
+  try {
+    if (typeof name !== "string" || null) {
+      throw new Error("Name must by a string");
+    }
+    const data = await tasks.editName(name, id);
+    res.status(200).json({ status: "ok", data });
+  } catch (err) {
+    res.status(500).json({ status: "fail", data: { message: err.message } });
   }
 });
 
