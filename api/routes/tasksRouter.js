@@ -59,4 +59,23 @@ router.put("/edit-name", async (req, res) => {
   }
 });
 
+router.get("/tasks", async (req, res) => {
+  try {
+    const data = await tasks.getAll();
+    res.status(200).json({ status: "ok", data });
+  } catch (err) {
+    res.status(500).json({ status: "fail", data: { message: err.message } });
+  }
+});
+
+router.get("/task-:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await tasks.getTask(parseInt(id, 10));
+    res.status(200).json({ sucess: "ok", data });
+  } catch (err) {
+    res.status(500).json({ status: "fail", data: { message: err.message } });
+  }
+});
+
 module.exports = router;

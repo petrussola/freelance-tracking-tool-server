@@ -5,6 +5,8 @@ module.exports = {
   pauseTask,
   finishTask,
   editName,
+  getAll,
+  getTask
 };
 
 async function createTask(name, startTime) {
@@ -61,4 +63,8 @@ async function finishTask(id, diffTime, endTime) {
 async function editName(name, id) {
   const data = await db("jobs").where({ jobId: id }).update({ name }, "jobId");
   return data;
+}
+
+async function getAll() {
+  return await db("jobs");
 }
