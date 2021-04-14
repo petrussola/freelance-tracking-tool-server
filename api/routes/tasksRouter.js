@@ -78,4 +78,14 @@ router.get("/task-:id", async (req, res) => {
   }
 });
 
+router.delete("/task-:id/delete", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await tasks.deleteTask(parseInt(id, 10));
+    res.status(200).json({ sucess: "ok", data });
+  } catch (err) {
+    res.status(500).json({ status: "fail", data: { message: err.message } });
+  }
+});
+
 module.exports = router;

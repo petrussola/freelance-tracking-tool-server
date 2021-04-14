@@ -6,7 +6,8 @@ module.exports = {
   finishTask,
   editName,
   getAll,
-  getTask
+  getTask,
+  deleteTask
 };
 
 async function createTask(name, startTime) {
@@ -67,4 +68,11 @@ async function editName(name, id) {
 
 async function getAll() {
   return await db("jobs");
+}
+
+async function deleteTask(id) {
+  const data = await db("jobs").where({ jobId: id }).del();
+  if (data) {
+    return await getAll();
+  }
 }
