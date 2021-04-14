@@ -68,7 +68,7 @@ router.get("/tasks", async (req, res) => {
   }
 });
 
-router.get("/task-:id", async (req, res) => {
+router.get("/task/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const data = await tasks.getTask(parseInt(id, 10));
@@ -78,7 +78,7 @@ router.get("/task-:id", async (req, res) => {
   }
 });
 
-router.delete("/task-:id/delete", async (req, res) => {
+router.delete("/task/:id/delete", async (req, res) => {
   try {
     const { id } = req.params;
     const data = await tasks.deleteTask(parseInt(id, 10));
